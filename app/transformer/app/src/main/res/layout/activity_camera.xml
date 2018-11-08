@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.suka.transformer.CameraActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#000000"
+    tools:context="com.example.suka.transformer.CameraActivity"
+    >
 
     <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/camera_btn"
+        android:background="@drawable/baseline_camera_alt_white_48"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/camera_btn"/>
+        android:text="사진 찍기"
+        android:textSize="30sp"
+        android:textColor="#FFFFFF"/>
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:id="@+id/iv"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

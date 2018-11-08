@@ -202,6 +202,7 @@ public class CameraActivity extends AppCompatActivity {
             super.onPostExecute(bitmap);
 
             Log.e("STATE", "onPostExecute");
+            iv.setImageBitmap(bitmap);
 //            saveTempImage(bitmap);
             client.getConnectionManager().shutdown();
             asyncDialog.dismiss();
