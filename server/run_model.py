@@ -39,14 +39,16 @@ def save_image(imgs):
 	result.save("uploads/result.jpg")
 	return;
 
+def load_model():
+	gpu_options = tf.GPUOptions(allow_growth=True)
+	sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+
+	loader = tf.train.import_meta_graph('/home/suka/git/Transformer/server/model/cyclegan-67.meta')
+	loader.restore(sess, tf.train.latest_checkpoint('/home/suka/git/Transformer/server/model'))
+	return sess
+	
+
 app = Flask(__name__)
-
-
-gpu_options = tf.GPUOptions(allow_growth=True)
-sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
-
-loader = tf.train.import_meta_graph('/home/suka/git/Transformer/server/model/cyclegan-67.meta')
-loader.restore(sess, tf.train.latest_checkpoint('/home/suka/git/Transformer/server/model'))
 
 UPLOAD_FOLDER = os.path.basename('uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -60,6 +62,7 @@ def upload():
     img = img.resize((512,512))
     img.save("uploads/before.jpg")
 
+    sess = load_model()
     img = divide_img(np.array(img))
     outputs = run_model(sess,img)
     outputs = outputs.reshape(4,256,256,3)
